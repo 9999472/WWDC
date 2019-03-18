@@ -69,7 +69,7 @@ final class ContentsResponseAdapter: Adapter {
 
         // remove duplicated sessions
         instances.forEach { instance in
-            guard let index = sessions.index(where: { $0.identifier == instance.session?.identifier }) else { return }
+            guard let index = sessions.firstIndex(where: { $0.identifier == instance.session?.identifier }) else { return }
 
             sessions.remove(at: index)
         }

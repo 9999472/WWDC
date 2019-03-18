@@ -124,12 +124,12 @@ final class SessionsJSONAdapter: Adapter {
 
         if let resourcesJSON = input[SessionKeys.related][RelatedKeys.resources].array {
             if case .success(let resources) = SessionRelatedJSONAdapter().adapt(resourcesJSON) {
-                session.related.append(contentsOf: resources)
+                session.related.append(objectsIn: resources)
             }
         }
 
         if let activitiesJSON = input[SessionKeys.related][RelatedKeys.activities].array {
-            session.related.append(contentsOf: activitiesJSON.compactMap {
+            session.related.append(objectsIn: activitiesJSON.compactMap {
                 let resource = RelatedResource()
                 resource.identifier = $0.string!
                 resource.type = RelatedResourceType.session.rawValue
