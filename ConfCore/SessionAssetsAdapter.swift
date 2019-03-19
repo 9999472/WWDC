@@ -15,7 +15,7 @@ final class SessionAssetsJSONAdapter: Adapter {
     typealias OutputType = [SessionAsset]
 
     func adapt(_ input: JSON) -> Result<[SessionAsset], AdapterError> {
-        return .error(.invalidData)
+        return .failure(.invalidData)
     }
 
 }

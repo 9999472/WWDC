@@ -24,11 +24,11 @@ final class PhotosJSONAdapter: Adapter {
 
     func adapt(_ input: JSON) -> Result<Photo, AdapterError> {
         guard let id = input[PhotoKeys.id].string else {
-            return .error(.missingKey(PhotoKeys.id))
+            return .failure(.missingKey(PhotoKeys.id))
         }
 
         guard let ratio = input[PhotoKeys.ratio].double else {
-            return .error(.missingKey(PhotoKeys.ratio))
+            return .failure(.missingKey(PhotoKeys.ratio))
         }
 
         let representations = PhotoRepresentationSize.all.map { size -> PhotoRepresentation in

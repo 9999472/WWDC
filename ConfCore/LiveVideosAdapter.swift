@@ -24,11 +24,11 @@ final class LiveVideosAdapter: Adapter {
 
     func adapt(_ input: JSON) -> Result<SessionAsset, AdapterError> {
         guard let sessionId = input[LiveVideoKeys.sessionId].string else {
-            return .error(.missingKey(LiveVideoKeys.sessionId))
+            return .failure(.missingKey(LiveVideoKeys.sessionId))
         }
 
         guard let url = input[LiveVideoKeys.tvosUrl].string ?? input[LiveVideoKeys.iosUrl].string else {
-            return .error(.missingKey(LiveVideoKeys.tvosUrl))
+            return .failure(.missingKey(LiveVideoKeys.tvosUrl))
         }
 
         let asset = SessionAsset()

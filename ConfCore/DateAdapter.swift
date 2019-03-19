@@ -23,7 +23,7 @@ final class DateAdapter: Adapter {
         if let date = formatter.date(from: input) {
             return .success(date)
         } else {
-            return .error(.invalidData)
+            return .failure(.invalidData)
         }
     }
 }
@@ -41,7 +41,7 @@ final class DateTimeAdapter: Adapter {
         if let date = formatter.date(from: input) {
             return .success(date)
         } else {
-            return .error(.invalidData)
+            return .failure(.invalidData)
         }
     }
 }

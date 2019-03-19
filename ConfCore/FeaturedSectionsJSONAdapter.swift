@@ -27,23 +27,23 @@ final class FeaturedSectionsJSONAdapter: Adapter {
 
     func adapt(_ input: JSON) -> Result<FeaturedSection, AdapterError> {
         guard let contentsJSON = input[FeaturedSectionKeys.content].array else {
-            return .error(.missingKey(FeaturedSectionKeys.content))
+            return .failure(.missingKey(FeaturedSectionKeys.content))
         }
 
         guard case .success(let contents) = FeaturedContentJSONAdapter().adapt(contentsJSON) else {
-            return .error(.invalidData)
+            return .failure(.invalidData)
         }
 
         guard let ordinal = input[FeaturedSectionKeys.ordinal].int else {
-            return .error(.missingKey(FeaturedSectionKeys.ordinal))
+            return .failure(.missingKey(FeaturedSectionKeys.ordinal))
         }
 
         guard let title = input[FeaturedSectionKeys.title].string else {
-            return .error(.missingKey(FeaturedSectionKeys.title))
+            return .failure(.missingKey(FeaturedSectionKeys.title))
         }
 
         guard let summary = input[FeaturedSectionKeys.description].string else {
-            return .error(.missingKey(FeaturedSectionKeys.description))
+            return .failure(.missingKey(FeaturedSectionKeys.description))
         }
 
         let section = FeaturedSection()

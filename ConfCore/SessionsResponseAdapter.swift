@@ -23,9 +23,9 @@ final class SessionsResponseAdapter: Adapter {
     typealias OutputType = SessionsResponse
 
     func adapt(_ input: JSON) -> Result<SessionsResponse, AdapterError> {
-        return .error(.invalidData)
+        return .failure(.invalidData)
 //        guard let eventsJson = input[SessionResponseKeys.events].array else {
-//            return .error(.missingKey(SessionResponseKeys.events))
+//            return .failure(.missingKey(SessionResponseKeys.events))
 //        }
 //        
 //        guard let sessionsJson = input[SessionResponseKeys.sessions].array else {

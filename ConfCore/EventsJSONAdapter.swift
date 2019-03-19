@@ -27,35 +27,35 @@ final class EventsJSONAdapter: Adapter {
 
     func adapt(_ input: JSON) -> Result<Event, AdapterError> {
         guard let identifier = input[EventKeys.identifier].string else {
-            return .error(.missingKey(EventKeys.identifier))
+            return .failure(.missingKey(EventKeys.identifier))
         }
 
         guard let name = input[EventKeys.name].string else {
-            return .error(.missingKey(EventKeys.name))
+            return .failure(.missingKey(EventKeys.name))
         }
 
         guard let current = input[EventKeys.current].bool else {
-            return .error(.missingKey(EventKeys.current))
+            return .failure(.missingKey(EventKeys.current))
         }
 
         guard let imagesPath = input[EventKeys.imagesPath].string else {
-            return .error(.missingKey(EventKeys.imagesPath))
+            return .failure(.missingKey(EventKeys.imagesPath))
         }
 
         guard let rawStart = input[EventKeys.start].string else {
-            return .error(.missingKey(EventKeys.start))
+            return .failure(.missingKey(EventKeys.start))
         }
 
         guard let rawEnd = input[EventKeys.end].string else {
-            return .error(.missingKey(EventKeys.end))
+            return .failure(.missingKey(EventKeys.end))
         }
 
         guard case .success(let startDate) = DateTimeAdapter().adapt(rawStart) else {
-            return .error(.invalidData)
+            return .failure(.invalidData)
         }
 
         guard case .success(let endDate) = DateTimeAdapter().adapt(rawEnd) else {
-            return .error(.invalidData)
+            return .failure(.invalidData)
         }
 
         let event = Event.make(identifier: identifier,

@@ -27,43 +27,43 @@ final class SessionInstancesJSONAdapter: Adapter {
 
     func adapt(_ input: JSON) -> Result<SessionInstance, AdapterError> {
         guard case .success(let session) = SessionsJSONAdapter().adapt(input) else {
-            return .error(.invalidData)
+            return .failure(.invalidData)
         }
 
         guard let startGMT = input[SessionInstanceKeys.startTime].string else {
-            return .error(.missingKey(SessionInstanceKeys.startTime))
+            return .failure(.missingKey(SessionInstanceKeys.startTime))
         }
 
         guard let endGMT = input[SessionInstanceKeys.endTime].string else {
-            return .error(.missingKey(SessionInstanceKeys.startTime))
+            return .failure(.missingKey(SessionInstanceKeys.startTime))
         }
 
         guard let rawType = input[SessionInstanceKeys.type].string else {
-            return .error(.missingKey(SessionInstanceKeys.type))
+            return .failure(.missingKey(SessionInstanceKeys.type))
         }
 
         guard let id = input[SessionInstanceKeys.id].string else {
-            return .error(.missingKey(SessionInstanceKeys.id))
+            return .failure(.missingKey(SessionInstanceKeys.id))
         }
 
         guard let eventId = input[SessionInstanceKeys.eventId].string else {
-            return .error(.missingKey(SessionInstanceKeys.eventId))
+            return .failure(.missingKey(SessionInstanceKeys.eventId))
         }
 
         guard let roomIdentifier = input[SessionInstanceKeys.room].int else {
-            return .error(.missingKey(SessionInstanceKeys.room))
+            return .failure(.missingKey(SessionInstanceKeys.room))
         }
 
         guard let trackIdentifier = input[SessionInstanceKeys.track].int else {
-            return .error(.missingKey(SessionInstanceKeys.track))
+            return .failure(.missingKey(SessionInstanceKeys.track))
         }
 
         guard case .success(let startDate) = DateTimeAdapter().adapt(startGMT) else {
-            return .error(.invalidData)
+            return .failure(.invalidData)
         }
 
         guard case .success(let endDate) = DateTimeAdapter().adapt(endGMT) else {
-            return .error(.invalidData)
+            return .failure(.invalidData)
         }
 
         let instance = SessionInstance()

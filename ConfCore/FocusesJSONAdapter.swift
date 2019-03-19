@@ -16,7 +16,7 @@ final class FocusesJSONAdapter: Adapter {
 
     func adapt(_ input: JSON) -> Result<Focus, AdapterError> {
         guard let name = input.string else {
-            return .error(.invalidData)
+            return .failure(.invalidData)
         }
 
         let focus = Focus()

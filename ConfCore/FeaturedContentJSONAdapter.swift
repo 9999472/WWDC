@@ -25,7 +25,7 @@ final class FeaturedContentJSONAdapter: Adapter {
 
     func adapt(_ input: JSON) -> Result<FeaturedContent, AdapterError> {
         guard let sessionId = input[FeaturedContentKeys.sessionId].string else {
-            return .error(.missingKey(FeaturedContentKeys.sessionId))
+            return .failure(.missingKey(FeaturedContentKeys.sessionId))
         }
 
         let content = FeaturedContent()

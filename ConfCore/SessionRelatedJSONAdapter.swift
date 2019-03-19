@@ -15,7 +15,7 @@ final class SessionRelatedJSONAdapter: Adapter {
 
     func adapt(_ input: JSON) -> Result<RelatedResource, AdapterError> {
         guard let id = input.int else {
-            return .error(.invalidData)
+            return .failure(.invalidData)
         }
 
         let resource = RelatedResource()

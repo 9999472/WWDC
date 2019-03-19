@@ -23,19 +23,19 @@ final class FeaturedAuthorJSONAdapter: Adapter {
 
     func adapt(_ input: JSON) -> Result<FeaturedAuthor, AdapterError> {
         guard let name = input[FeaturedAuthorKeys.name].string else {
-            return .error(.missingKey(FeaturedAuthorKeys.name))
+            return .failure(.missingKey(FeaturedAuthorKeys.name))
         }
 
         guard let bio = input[FeaturedAuthorKeys.bio].string else {
-            return .error(.missingKey(FeaturedAuthorKeys.bio))
+            return .failure(.missingKey(FeaturedAuthorKeys.bio))
         }
 
         guard let avatar = input[FeaturedAuthorKeys.avatar].string else {
-            return .error(.missingKey(FeaturedAuthorKeys.avatar))
+            return .failure(.missingKey(FeaturedAuthorKeys.avatar))
         }
 
         guard let url = input[FeaturedAuthorKeys.url].string else {
-            return .error(.missingKey(FeaturedAuthorKeys.url))
+            return .failure(.missingKey(FeaturedAuthorKeys.url))
         }
 
         let author = FeaturedAuthor()

@@ -204,7 +204,7 @@ extension AppleAPIClient {
         let result = adapter.adapt(input)
 
         switch result {
-        case let .error(error):
+        case let .failure(error):
             throw error
         case let .success(output):
             return output
@@ -216,7 +216,7 @@ extension AppleAPIClient {
         let result = adapter.adapt(input)
 
         switch result {
-        case let .error(error):
+        case let .failure(error):
             throw error
         case let .success(output):
             return output
@@ -226,12 +226,12 @@ extension AppleAPIClient {
     fileprivate func process<M>(_ resource: Resource, event: ResourceEvent, with completion: @escaping (Result<M, APIError>) -> Void) {
         switch event {
         case .error:
-            completion(.error(resource.error))
+            completion(.failure(resource.error))
         case .newData:
             if let results: M = resource.typedContent() {
                 completion(.success(results))
             } else {
-                completion(.error(.adapter))
+                completion(.failure(.adapter))
             }
         default: break
         }

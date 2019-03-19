@@ -42,29 +42,29 @@ final class SessionsJSONAdapter: Adapter {
 
     func adapt(_ input: JSON) -> Result<Session, AdapterError> {
         guard let id = input[SessionKeys.id].string else {
-            return .error(.missingKey(SessionKeys.id))
+            return .failure(.missingKey(SessionKeys.id))
         }
 
         guard let eventIdentifier = input[SessionKeys.eventId].string else {
-            return .error(.missingKey(SessionKeys.eventId))
+            return .failure(.missingKey(SessionKeys.eventId))
         }
 
         let eventYear = eventIdentifier.replacingOccurrences(of: "wwdc", with: "")
 
         guard let title = input[SessionKeys.title].string else {
-            return .error(.missingKey(SessionKeys.title))
+            return .failure(.missingKey(SessionKeys.title))
         }
 
         guard let summary = input[SessionKeys.description].string else {
-            return .error(.missingKey(SessionKeys.description))
+            return .failure(.missingKey(SessionKeys.description))
         }
 
         guard let trackIdentifier = input[SessionKeys.track].int else {
-            return .error(.missingKey(SessionKeys.track))
+            return .failure(.missingKey(SessionKeys.track))
         }
 
         guard let eventContentId = input[SessionKeys.eventContentId].int else {
-            return .error(.missingKey(SessionKeys.eventContentId))
+            return .failure(.missingKey(SessionKeys.eventContentId))
         }
 
         let session = Session()

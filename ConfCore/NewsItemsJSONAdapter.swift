@@ -24,19 +24,19 @@ final class NewsItemsJSONAdapter: Adapter {
 
     func adapt(_ input: JSON) -> Result<NewsItem, AdapterError> {
         if let type = input[NewsItemKeys.type].string {
-            guard type != "pass" else { return .error(.unsupported) }
+            guard type != "pass" else { return .failure(.unsupported) }
         }
 
         guard let id = input[NewsItemKeys.id].string else {
-            return .error(.missingKey(NewsItemKeys.id))
+            return .failure(.missingKey(NewsItemKeys.id))
         }
 
         guard let title = input[NewsItemKeys.title].string else {
-            return .error(.missingKey(NewsItemKeys.title))
+            return .failure(.missingKey(NewsItemKeys.title))
         }
 
         guard let timestamp = input[NewsItemKeys.timestamp].double else {
-            return .error(.missingKey(NewsItemKeys.timestamp))
+            return .failure(.missingKey(NewsItemKeys.timestamp))
         }
 
         let visibility = input[NewsItemKeys.visibility].stringValue

@@ -23,15 +23,15 @@ final class BookmarkJSONAdapter: Adapter {
 
     func adapt(_ input: JSON) -> Result<Bookmark, AdapterError> {
         guard let body = input[BookmarkKeys.body].string else {
-            return .error(.missingKey(BookmarkKeys.body))
+            return .failure(.missingKey(BookmarkKeys.body))
         }
 
         guard let timecode = input[BookmarkKeys.timecode].double else {
-            return .error(.missingKey(BookmarkKeys.timecode))
+            return .failure(.missingKey(BookmarkKeys.timecode))
         }
 
         guard let duration = input[BookmarkKeys.duration].double else {
-            return .error(.missingKey(BookmarkKeys.duration))
+            return .failure(.missingKey(BookmarkKeys.duration))
         }
 
         let bookmark = Bookmark()

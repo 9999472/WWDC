@@ -24,47 +24,47 @@ final class ContentsResponseAdapter: Adapter {
 
     func adapt(_ input: JSON) -> Result<ContentsResponse, AdapterError> {
         guard let eventsJson = input[ContentKeys.events].array else {
-            return .error(.missingKey(ContentKeys.events))
+            return .failure(.missingKey(ContentKeys.events))
         }
 
         guard case .success(let events) = EventsJSONAdapter().adapt(eventsJson) else {
-            return .error(.invalidData)
+            return .failure(.invalidData)
         }
 
         guard let roomsJson = input[ContentKeys.rooms].array else {
-            return .error(.missingKey(ContentKeys.rooms))
+            return .failure(.missingKey(ContentKeys.rooms))
         }
 
         guard case .success(let rooms) = RoomsJSONAdapter().adapt(roomsJson) else {
-            return .error(.invalidData)
+            return .failure(.invalidData)
         }
 
         guard let tracksJson = input[ContentKeys.tracks].array else {
-            return .error(.missingKey(ContentKeys.rooms))
+            return .failure(.missingKey(ContentKeys.rooms))
         }
 
         guard case .success(let tracks) = TracksJSONAdapter().adapt(tracksJson) else {
-            return .error(.missingKey(ContentKeys.tracks))
+            return .failure(.missingKey(ContentKeys.tracks))
         }
 
         guard let resourcesJSON = input[ContentKeys.resources].array else {
-            return .error(.missingKey(ContentKeys.resources))
+            return .failure(.missingKey(ContentKeys.resources))
         }
 
         guard case .success(let resources) = ResourcesJSONAdapter().adapt(resourcesJSON) else {
-            return .error(.invalidData)
+            return .failure(.invalidData)
         }
 
         guard let sessionsJson = input[ContentKeys.contents].array else {
-            return .error(.missingKey(ContentKeys.contents))
+            return .failure(.missingKey(ContentKeys.contents))
         }
 
         guard case .success(var sessions) = SessionsJSONAdapter().adapt(sessionsJson) else {
-            return .error(.invalidData)
+            return .failure(.invalidData)
         }
 
         guard case .success(let instances) = SessionInstancesJSONAdapter().adapt(sessionsJson) else {
-            return .error(.invalidData)
+            return .failure(.invalidData)
         }
 
         // remove duplicated sessions

@@ -24,19 +24,19 @@ class ResourcesJSONAdapter: Adapter {
 
     func adapt(_ input: JSON) -> Result<RelatedResource, AdapterError> {
         guard let id = input[ResourceKeys.id].int else {
-            return .error(.missingKey(ResourceKeys.id))
+            return .failure(.missingKey(ResourceKeys.id))
         }
 
         guard let title = input[ResourceKeys.title].string else {
-            return .error(.missingKey(ResourceKeys.title))
+            return .failure(.missingKey(ResourceKeys.title))
         }
 
         guard let url = input[ResourceKeys.url].string else {
-            return .error(.missingKey(ResourceKeys.url))
+            return .failure(.missingKey(ResourceKeys.url))
         }
 
         guard let rawType = input[ResourceKeys.type].string else {
-            return .error(.missingKey(ResourceKeys.type))
+            return .failure(.missingKey(ResourceKeys.type))
         }
 
         let resource = RelatedResource()

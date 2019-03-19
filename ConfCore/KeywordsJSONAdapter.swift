@@ -16,7 +16,7 @@ final class KeywordsJSONAdapter: Adapter {
 
     func adapt(_ input: JSON) -> Result<Keyword, AdapterError> {
         guard let name = input.string else {
-            return .error(.invalidData)
+            return .failure(.invalidData)
         }
 
         let keyword = Keyword()

@@ -45,7 +45,7 @@ class AdapterTests: XCTestCase {
         let result = EventsJSONAdapter().adapt(eventsArray)
 
         switch result {
-        case .error(let error):
+        case .failure(let error):
             XCTFail(error.localizedDescription)
         case .success(let events):
             XCTAssertEqual(events.count, 5)
@@ -71,7 +71,7 @@ class AdapterTests: XCTestCase {
         let result = RoomsJSONAdapter().adapt(roomsArray)
 
         switch result {
-        case .error(let error):
+        case .failure(let error):
             XCTFail(error.localizedDescription)
         case .success(let rooms):
             XCTAssertEqual(rooms.count, 35)
@@ -95,7 +95,7 @@ class AdapterTests: XCTestCase {
         let result = TracksJSONAdapter().adapt(tracksArray)
 
         switch result {
-        case .error(let error):
+        case .failure(let error):
             XCTFail(error.localizedDescription)
         case .success(let tracks):
             XCTAssertEqual(tracks.count, 8)
@@ -125,7 +125,7 @@ class AdapterTests: XCTestCase {
         let result = KeywordsJSONAdapter().adapt(keywordsArray)
 
         switch result {
-        case .error(let error):
+        case .failure(let error):
             XCTFail(error.localizedDescription)
         case .success(let keywords):
             XCTAssertEqual(keywords.count, 10)
@@ -155,7 +155,7 @@ class AdapterTests: XCTestCase {
         let result = FocusesJSONAdapter().adapt(focusesArray)
 
         switch result {
-        case .error(let error):
+        case .failure(let error):
             XCTFail(error.localizedDescription)
         case .success(let focuses):
             XCTAssertEqual(focuses.count, 3)
@@ -179,7 +179,7 @@ class AdapterTests: XCTestCase {
         let result = SessionAssetsJSONAdapter().adapt(sessionsArray)
 
         switch result {
-        case .error(let error):
+        case .failure(let error):
             XCTFail(error.localizedDescription)
         case .success(let assets):
             let flattenedAssets = assets.flatMap({ $0 })
@@ -236,7 +236,7 @@ class AdapterTests: XCTestCase {
         let result = LiveVideosAdapter().adapt(sessionsArray)
 
         switch result {
-        case .error(let error):
+        case .failure(let error):
             XCTFail(error.localizedDescription)
         case .success(let assets):
             let sortedAssets = assets.sorted(by: { $0.sessionId < $1.sessionId })
@@ -258,7 +258,7 @@ class AdapterTests: XCTestCase {
         let result = SessionsJSONAdapter().adapt(sessionsArray)
 
         switch result {
-        case .error(let error):
+        case .failure(let error):
             XCTFail(error.localizedDescription)
         case .success(let sessions):
             XCTAssertEqual(sessions.count, 771)
@@ -284,7 +284,7 @@ class AdapterTests: XCTestCase {
         let result = SessionInstancesJSONAdapter().adapt(instancesArray)
 
         switch result {
-        case .error(let error):
+        case .failure(let error):
             XCTFail(error.localizedDescription)
         case .success(let instances):
             XCTAssertEqual(instances.count, 307)
@@ -338,7 +338,7 @@ class AdapterTests: XCTestCase {
         let result = NewsItemsJSONAdapter().adapt(newsArray)
 
         switch result {
-        case .error(let error):
+        case .failure(let error):
             XCTFail(error.localizedDescription)
         case .success(let items):
             XCTAssertEqual(items.count, 16)
@@ -366,7 +366,7 @@ class AdapterTests: XCTestCase {
         let result = TranscriptsJSONAdapter().adapt(json)
 
         switch result {
-        case .error(let error):
+        case .failure(let error):
             XCTFail(error.localizedDescription)
         case .success(let transcript):
             XCTAssertEqual(transcript.identifier, "wwdc2014-101")
@@ -388,7 +388,7 @@ class AdapterTests: XCTestCase {
         let result = FeaturedSectionsJSONAdapter().adapt(sectionsArray)
 
         switch result {
-        case .error(let error):
+        case .failure(let error):
             XCTFail(error.localizedDescription)
         case .success(let sections):
             XCTAssertEqual(sections[0].order, -1)

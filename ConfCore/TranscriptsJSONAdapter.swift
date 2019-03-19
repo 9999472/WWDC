@@ -26,19 +26,19 @@ final class TranscriptsJSONAdapter: Adapter {
 
     func adapt(_ input: JSON) -> Result<Transcript, AdapterError> {
         guard let year = input[TranscriptKeys.year].int else {
-            return .error(.missingKey(TranscriptKeys.year))
+            return .failure(.missingKey(TranscriptKeys.year))
         }
 
         guard let number = input[TranscriptKeys.number].int else {
-            return .error(.missingKey(TranscriptKeys.number))
+            return .failure(.missingKey(TranscriptKeys.number))
         }
 
         guard let timecodes = input[TranscriptKeys.timecodes].array else {
-            return .error(.missingKey(TranscriptKeys.timecodes))
+            return .failure(.missingKey(TranscriptKeys.timecodes))
         }
 
         guard let annotationsJson = input[TranscriptKeys.annotations].array else {
-            return .error(.missingKey(TranscriptKeys.annotations))
+            return .failure(.missingKey(TranscriptKeys.annotations))
         }
 
         let annotations: [TranscriptAnnotation] = zip(timecodes, annotationsJson).compactMap { time, body in
